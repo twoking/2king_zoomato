@@ -6,12 +6,7 @@
     <p class="mb-0">Select All</p>
   </div>
   <hr>
-  <% current_user.followings.each do |friend| %>
-  <div class="form-check">
-    <input class="friend-filter regular-checkbox" type="checkbox" id="user-friend-<%=friend.id%>" value="<%= friend.id %>">
-    <label class="form-check-label" for="user-friend-<%=friend.id%>">
-      <%= friend.name %> <%#= friend.email) %>
-    </label>
+  <div id="friends-list">
+
   </div>
-  <% end %>
 </div>

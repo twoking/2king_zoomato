@@ -20,6 +20,7 @@ gem 'webpacker'
 gem 'gon'
 gem "serviceworker-rails"
 gem 'geocoder'
+gem 'simple_token_authentication'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
