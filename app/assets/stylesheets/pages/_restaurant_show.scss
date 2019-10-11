@@ -1,0 +1,60 @@
+.carousel-container {
+  position: sticky;
+  top: 0px
+}
+
+.restaurant-info-container {
+  overflow: auto;
+  height: 100%;
+}
+
+.restaurant-show-card {
+  border-top: 1px solid $blue;
+  border-bottom: 1px solid $blue;
+  background: white;
+  text-align: left;
+  font-size: 14px;
+}
+
+.show-container {
+  min-height: calc(100vh - 45px) !important;
+}
+
+.show-card-label {
+  width: 23%
+}
+
+.show-card-info {
+  width: 75%
+}
+
+.time-display-close {
+  overflow: auto;
+  height: 0px;
+  //transition: height 0.7s;
+}
+
+.time-display-open {
+  height: 100%
+}
+
+.opening-hours-box {
+  list-style: none;
+  margin: 0px;
+  text-align: left;
+  padding: 0px 14px;
+  font-size: 14px;
+
+  div {
+    padding-right: 30%;
+
+    p {
+      margin-bottom: 5px
+    }
+  }
+}
+
+.gray-price {
+  color: rgb(195, 195, 195);
+  letter-spacing: -1.8px;
+}

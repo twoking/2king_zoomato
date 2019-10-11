@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 5.times do |n| %>
+resto_<%= n %>:
+  name: <%= Faker::Restaurant.name %>
+  address: <%= Faker::Address.full_address %>
+  phone_number: <%= Faker::PhoneNumber.phone_number %>,
+  latitude: <%= rand(-90.0..90.0).round(3) %>,
+  longitude: <%= rand(-180.0..180.0).round(3) %>
+<% end %>

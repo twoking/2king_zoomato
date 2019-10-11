@@ -1,0 +1,26 @@
+<div class="full-page-container">
+  <div id="map" class="home-map"></div>
+
+  <div class="container list-show-header-container pt-3">
+      <h1 class="mb-3 text-center">HERE ARE THE FAVOURITE RESTAURANTS OF <%= @user.name.upcase %></h1>
+      <div class="add-form-container">
+        <% if user_signed_in? %>
+          <%= form_tag users_follow_path(@user), id:"follower_form" do %>
+            <%= button_tag do %>
+              <span style="font-size: 25px; font-weight: bold; margin-right: 10px">+</span>
+              Import <%= @user.name.split(" ").first %>'s list
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to "Import #{ @user.name.split(" ").first }'s list", user_facebook_omniauth_authorize_path, class: "nav-link", method: :post %><%= %>
+        <% end %>
+      </div>
+  </div>
+
+  <div class="container my-3 overflow-auto main-panel" >
+    <% @restaurants.each do |resto| %>
+      <%= render "restaurants/restaurant_card", resto: resto, link:false %>
+    <% end %>
+  </div>
+
+</div>

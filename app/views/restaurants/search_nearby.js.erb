@@ -1,0 +1,8 @@
+document.querySelector(".loader-container").remove()
+document.querySelector("#search-results").insertAdjacentHTML("afterbegin", "<%= j render 'restaurant_card_search', restaurants: @restaurants, link: true %>")
+
+
+<% if @restaurants.size > 0 %> 
+  localStorage.setItem('restaurants', "<%= raw @restaurants.pluck(:zoomato_place_id).to_json%>")
+<% end %> 
+

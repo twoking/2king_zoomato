@@ -1,0 +1,6 @@
+<%= form_for List.new, remote: true do %>
+  <%= hidden_field_tag 'restaurant_id', @restaurant.id %>
+  <%= button_tag do %>
+    <span style="font-size: 25px; font-weight: bold; margin-right: 10px">+</span> Add to your list
+  <% end %>
+<% end %>

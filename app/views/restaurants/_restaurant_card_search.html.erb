@@ -1,0 +1,16 @@
+<% restaurants.each do |resto| %>
+  <div class="col-md-6">
+    <%= link_to restaurant_path(resto.zoomato_place_id) do%>
+    <div class="card-product my-2 <%= 'my-4' unless link %>" >
+      <img src="<%= resto.photos.first %>">
+      <div class="card-product-infos">
+        <h2><%= resto.name %></h2>
+        <p class="my-0"><span class="resto-distance"><%= resto.display_distance %></span></p>
+        <p class="my-0 mr-1"><%= resto.display_price_level %> | <%= resto.cuisines %></p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+<% end %>
+
+

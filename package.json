@@ -1,0 +1,16 @@
+{
+  "name": "toking",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^4.0.7",
+    "bootstrap": "^4.3.1",
+    "haversine": "^1.1.1",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.13",
+    "places.js": "^1.16.6",
+    "popper.js": "^1.15.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.7.1"
+  }
+}

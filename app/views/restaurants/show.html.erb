@@ -1,0 +1,77 @@
+<div class="full-page-container">
+  <div class="container-fluid carousel-container">
+    <div class="row">
+      <div class="col-md-6 mx-auto p-0">
+        <div class="card carousel-picture-container">
+          <%= render "photo_carousel", photos: @restaurant.photos %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center restaurant-info-container">
+    <h1 class="restaurant-name text-center my-3"><%= @restaurant.name.upcase %></h1>
+    <div class="restaurant-show-card py-2">
+      <div class="d-flex mb-1 justify-content-between">
+        <div class="show-card-label">Address:</div>
+        <div class="show-card-info"><%= @restaurant.address.split(",")[0..1].join(", ") %></div>
+      </div>
+      <div class="d-flex mb-1 justify-content-between">
+        <div class="show-card-label">Phone:</div>
+        <div class="show-card-info"><%= @restaurant.phone_number %></div>
+      </div>
+      <% if @restaurant.timings %>
+      <div class="d-flex mb-1 justify-content-between">
+        <div class="show-card-label">Hours:</div>
+        <div class="show-card-info"><%= @restaurant.timings %></div>
+      </div>
+      <% end %>
+
+      <% if @restaurant.price_level %>
+      <div class="d-flex mb-1 justify-content-between">
+        <div class="show-card-label">Price level:</div>
+        <div class="show-card-info d-flex">
+          <span><%= @restaurant.display_price_level %></span>
+          <% if @restaurant.price_level != '' %>
+            <span class="gray-price">
+              <% (5 - @restaurant.price_level.to_i).times do %>
+                $
+              <% end %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if user_signed_in? %>
+<div class="footer">
+  <div class="footer-btn footer-btn-left ">
+    <div id="restaurant-form-container" class="text-center">
+      <% if @restaurant.user_list(current_user) %>
+        <%= render "lists/destroy", list: @list %>
+      <% else %>
+        <%= render "lists/create", list: List.new %>
+      <% end %>
+    </div>
+  </div>
+  <div class="footer-btn footer-btn-right ">
+    <a class="" onclick="history.back()"><i class="fas fa-caret-left mr-1"></i>Go Back</a>
+  </div>
+</div>
+<% else %>
+<div class="footer">
+  <div class="footer-btn footer-btn-right w-100 ">
+    <a class="" onclick="history.back()"><i class="fas fa-caret-left mr-1"></i>Go Back</a>
+  </div>
+</div>
+<% end %>
+
+<!-- <script type="text/javascript">
+  const btn = document.querySelector("#show-hours-btn")
+  btn.addEventListener("click", ()=>{
+    const box = document.querySelector(".time-display-close")
+    box.classList.toggle("time-display-open")
+  })
+</script> -->

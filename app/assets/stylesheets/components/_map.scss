@@ -1,0 +1,32 @@
+.map-wrapper {
+  position: sticky;
+  top: 0px;
+  z-index: 12;
+  #info-window {
+    border: 1px solid #1D347F;
+    border-radius: 5px;
+    position: absolute;
+    text-align: center;
+    background: white;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+
+    i {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 24px;
+    }
+  }
+}
+
+#map {
+  width: 100%;
+  height: 40vh;
+  z-index: 12;
+}

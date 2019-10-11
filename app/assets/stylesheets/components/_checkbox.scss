@@ -1,0 +1,24 @@
+#degree-filter .form-check {
+  margin-bottom: 1rem;
+}
+
+.regular-checkbox {
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  border: 1px solid #1D347F;
+  outline: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: .5rem;
+
+  &:checked {
+    background-color: #1D347F;
+  }
+}
+
+.degree-label {
+  vertical-align: middle;
+}

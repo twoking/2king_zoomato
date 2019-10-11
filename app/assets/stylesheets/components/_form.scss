@@ -1,0 +1,29 @@
+.form-control{
+  border: 1px solid $blue;
+  border-radius: 5px;
+}
+
+#follower_form{
+  button{
+    width: 100%;
+    border: 1px solid #303B82;
+    border-radius: 8px;
+  }
+}
+
+.add-form-container{
+  a{
+    width: 100%;
+    border: 1px solid #303B82;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px
+  }
+}
+
+.add-form-container{
+  position: sticky;
+top: 41vh;
+z-index: 11;
+background-color: white
+}

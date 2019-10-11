@@ -1,0 +1,12 @@
+.restaurant-card-link{
+  color: black;
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.restaurant-show-pic {
+  width: 100%;
+  height: 38vh;
+}

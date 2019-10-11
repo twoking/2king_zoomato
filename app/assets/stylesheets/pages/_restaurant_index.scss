@@ -1,0 +1,22 @@
+#search-restaurant-form{
+  #restaurant-location{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  button{
+    width: 10%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+}
+
+#search-restaurant-nearby{
+  width: 100%;
+  border: 1px solid $blue;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.full-page-container{
+  min-height: calc(100vh - 54px);
+}

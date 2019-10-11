@@ -1,0 +1,49 @@
+// Specific CSS for your home-page
+
+.home-container {
+  padding-bottom: 0;
+  margin-bottom: 0 !important;
+}
+
+.home-container.panel {
+  margin-top: 0 !important;
+}
+
+.home-btn-container {
+  margin: 0 auto;
+  background: white;
+  padding: 9px 15px;
+  position: sticky;
+  top: 40vh;
+  z-index: 10;
+
+  div {
+    border-radius: 8px;
+    margin-right: 2px;
+  }
+}
+
+.btn-home {
+  padding: 10px;
+  text-align: center;
+}
+
+.btn-home-gray {
+  border: 1px solid gray !important;
+  color: gray;
+}
+
+#triangle {
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  margin-right: .5rem;
+  border-radius: 2px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #eee;
+}
+
+.blue-triangle {
+  border-top: 30px solid $blue !important;
+}

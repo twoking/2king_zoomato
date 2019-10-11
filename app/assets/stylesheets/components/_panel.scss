@@ -1,0 +1,15 @@
+.panel {
+  @extend .container, .my-3;
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+.bottom-nav {
+  @extend .fixed-bottom;
+  display: none !important;
+  &.active {
+    @extend .d-flex;
+  }
+}

@@ -1,0 +1,2 @@
+var formContainer = document.querySelector("#restaurant-form-container")
+formContainer.innerHTML = ("<%= j render "lists/create", list: List.new, restaurant: @restaurant %>")

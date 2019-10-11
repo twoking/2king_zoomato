@@ -1,0 +1,17 @@
+// Import Google fonts
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
+
+// Define fonts for body and headers
+$body-font: "Open Sans", "Helvetica", "sans-serif";
+$headers-font: "Raleway", "Helvetica", "sans-serif";
+
+a:hover {
+  text-decoration: none !important
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 18px !important;
+    font-weight: bold !important;
+  }
+}

@@ -1,0 +1,53 @@
+.footer {
+  width: 100%;
+  height: 54px;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  padding-left: 2px;
+  padding-right: 2px;
+  justify-content: space-between;
+  z-index: 9;
+  background: white;
+  padding-top: 6px;
+}
+
+.footer-btn-big{
+  width: 100% !important;
+}
+.footer-btn{
+  width: 49.5%;
+  border: 1px solid $blue;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  justify-content: space-around;
+  a:hover{
+    text-decoration: none;
+    color: $blue
+  }
+}
+.footer-button-link{
+  text-align: center
+}
+#new_restaurant, #new_list, #follower_form{
+  text-align: center;
+  button{
+    display: flex;
+    font-size: 14px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: $blue
+  }
+}
+.close-time-box{
+
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

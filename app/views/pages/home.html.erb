@@ -1,0 +1,66 @@
+<% provide(:title, "Home") %>
+<div class="full-page-container">
+
+<div class="map-wrapper">
+  <div id="map" class="home-map">
+  </div>
+  <div id="info-window" class="invisible"></div>
+</div>
+
+
+  <div class="d-flex home-btn-container">
+    <div class="flex-fill footer-btn footer-btn-left ">
+      <%= link_to "My list", "#", id: "friend-filter", class: 'btn-home btn-block toggler', data: { target: 'degree-filter' } %>
+    </div>
+    <div class="flex-fill footer-btn footer-btn-left ">
+      <%= link_to "All friends", "#", class: 'btn-home btn-block toggler', data: { target: 'friend-filter' } %>
+    </div>
+  </div>
+
+
+  <div class="container home-container panel overflow-auto active">
+    <% current_user.restaurants.each do |resto| %>
+      <%= render "restaurants/restaurant_card", resto: resto, link: true %>
+    <% end %>
+  </div>
+
+  <div style="display: none" id="degree-filter" class="panel">
+    <%= render 'shared/filter/degree-filter' %>
+  </div>
+
+  <!-- <script>
+    const friendFilter = document.querySelector("#friend-filter")
+    friendFilter.addEventListener("click", ()=>{
+      document.querySelector("#degree-filter").style.display = "block"
+    })
+  </script> -->
+
+  <%= render 'shared/filter/friend-filter' %>
+  </div>
+</div>
+
+
+<div class="footer bottom-nav active" id="bottom-nav-filter">
+  <div class="footer-btn footer-btn-left ">
+    <div class="text-centerfooter-button-link">
+      <%= link_to restaurants_path, class: "footer-button-link" do %>
+        Add a Restaurant
+      <% end %>
+    </div>
+  </div>
+  <div class="footer-btn footer-btn-right ">
+    <a href="whatsapp://send?text=Here is my Food King list for you: <%= list_url(@link.token) %>" data-action="share/whatsapp/share">
+      <i class="mr-1 fas fa-share"></i>Share your list
+    </a>
+  </div>
+</div>
+
+<div class="footer bottom-nav" id="bottom-nav-home">
+  <div class="footer-btn footer-btn-big">
+    <div class="text-centerfooter-button-link">
+      <%= link_to root_path, class: "footer-button-link" do %>
+        <i class="mr-2 fas fa-chevron-circle-left"></i>See the list
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<% icon_sizes =  ["36", "48", "72", "76", "96", "144", "192", "512"] %>
+{
+  "name": "Food King",
+  "short_name": "Food King",
+  "start_url": "/",
+  "icons": [
+
+  <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
+    {
+      "src": "<%= image_path "icons/android-icon-#{dim}.png" %>",
+      "sizes": "<%= dim %>",
+      "type": "image/png"
+    }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
+
+  <% end %>
+  ],
+  "theme_color": "#303B82",
+  "background_color": "#FFFFFF",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
