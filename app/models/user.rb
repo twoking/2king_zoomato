@@ -21,10 +21,10 @@ class User < ApplicationRecord
   has_many :restaurants, through: :lists
 
   # validation
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates_presence_of :name
-  validates_format_of :email, with: VALID_EMAIL_REGEX
+  #validates_format_of :email, with: VALID_EMAIL_REGEX
 
   # callbacks
   before_save { self.email = email.downcase }
