@@ -4,13 +4,15 @@ class Api::V1::RestaurantsController < Api::V1::BaseController
   def index
     @restaurants = current_user.restaurants
     @user_restaurants = current_user.restaurants
-    @following = current_user.followings
+    @first_degree_friend = current_user.followings
+    @second_degree_friend = current_user.second_degree_followings
+    @third_degree_friend = current_user.third_degree_followings
+
+    @third_degree = current_user.third_degree_followings
     ids = []
-    @following_restaurants = @following.map do |user|
-      restaurants = user.restaurants.pluck(:id)
-      ids << restaurants
-      { friend_id: user.id, restaurants: restaurants }
-    end
-    @friend_restaurants = Restaurant.where(id: ids.flatten.uniq)
+    @first_degree_restaurants = current_user.restaurants_filter(options = { degrees: ["1"] })
+    @second_degree_restaurants = current_user.restaurants_filter(options = { degrees: ["2"] })
+    @third_degree_restaurants = current_user.restaurants_filter(options = { degrees: ["3"] })
+    @restaurants_list = @first_degree_restaurants + @second_degree_restaurants + @third_degree_restaurants + @user_restaurants
   end
 end

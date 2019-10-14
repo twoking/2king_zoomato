@@ -4,23 +4,32 @@ json.set! :user_restaurants do
   end
 end
 
-json.set! :friends do
-  json.array! @following do |friend|
+json.set! :first_degree_friend do
+  json.array! @first_degree_friend do |friend|
     json.extract! friend, :id, :name
     # binding.pry
     json.restaurants friend.restaurants.pluck(:zoomato_place_id)
   end
 end
 
-# json.set! :friend_favourites do
-#   json.array! @following_restaurants do |r|
-#     # binding.pry
-#     json.extract! r[:restaurants]
-#   end
-# end
+json.set! :second_degree_friend do
+  json.array! @second_degree_friend do |friend|
+    json.extract! friend, :id, :name
+    # binding.pry
+    json.restaurants friend.restaurants.pluck(:zoomato_place_id)
+  end
+end
+
+json.set! :third_degree_friend do
+  json.array! @third_degree_friend do |friend|
+    json.extract! friend, :id, :name
+    # binding.pry
+    json.restaurants friend.restaurants.pluck(:zoomato_place_id)
+  end
+end
 
 json.set! :friend_restaurants do
-  json.array! @friend_restaurants do |restaurant|
+  json.array! @restaurants_list do |restaurant|
     json.extract! restaurant, :zoomato_place_id, :name, :address, :photos, :latitude, :longitude
   end
 end
