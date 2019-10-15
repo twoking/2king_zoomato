@@ -7,7 +7,6 @@ end
 json.set! :first_degree_friend do
   json.array! @first_degree_friend do |friend|
     json.extract! friend, :id, :name
-    # binding.pry
     json.restaurants friend.restaurants.pluck(:zoomato_place_id)
   end
 end
@@ -15,7 +14,6 @@ end
 json.set! :second_degree_friend do
   json.array! @second_degree_friend do |friend|
     json.extract! friend, :id, :name
-    # binding.pry
     json.restaurants friend.restaurants.pluck(:zoomato_place_id)
   end
 end
@@ -23,7 +21,6 @@ end
 json.set! :third_degree_friend do
   json.array! @third_degree_friend do |friend|
     json.extract! friend, :id, :name
-    # binding.pry
     json.restaurants friend.restaurants.pluck(:zoomato_place_id)
   end
 end
