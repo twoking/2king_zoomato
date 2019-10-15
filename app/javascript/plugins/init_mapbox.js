@@ -14,6 +14,10 @@ const options = {
 //   navigator.geolocation.watchPosition(success, error, options);
 // }
 
+// const success = location => {
+// 	return initMapbox([location.coords.longitude, location.coords.latitude]);
+// };
+
 const getUserCoordinates = () => {
 	if (navigator.geolocation) {
 		return new Promise(resolve => {
@@ -22,10 +26,6 @@ const getUserCoordinates = () => {
 			});
 		});
 	}
-};
-
-const success = location => {
-	return initMapbox([location.coords.longitude, location.coords.latitude]);
 };
 
 const initMapbox = async () => {
