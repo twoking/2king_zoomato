@@ -13,6 +13,7 @@ class RestaurantsController < ApplicationController
       coordinates = Geocoder.coordinates(params[:location])
       restaurants_creator = RestaurantsCreator.new(lat: coordinates[0], lng: coordinates[1], query: params[:name])
       @restaurants = restaurants_creator.fetch_restaurants
+      @restaurants = Restaurant.order_by_distance(@restaurants, [params[:lat], params[:lng]])
     end
     respond_to do |format|
       format.html { redirect_to restaurants_path }
