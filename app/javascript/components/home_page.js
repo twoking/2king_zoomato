@@ -16,6 +16,7 @@ let third_degree_friends_restaurants_id = new Array();
 let my_restaurants_id = new Array();
 let mapElement;
 let markers = [];
+
 // HTML Components
 if (map) {
 	map.addEventListener("click", e => {
@@ -62,12 +63,19 @@ const friendInput = friend => {
 };
 
 const addInfoWindow = restaurant => {
+<<<<<<< HEAD
+=======
 	const priceRange = restaurant.price_level ? "$".repeat(restaurant.price_level) : ""
+>>>>>>> master
 	const infoWinfow = document.querySelector("#restaurant-info-window");
 	if (infoWinfow) infoWinfow.remove();
 	const panel = `
     <a class="map-info-window" id="restaurant-info-window" href="/restaurants/${restaurant.zoomato_place_id}">
+<<<<<<< HEAD
+      ${restaurant.name}
+=======
 			 <span class="mr-1">${restaurant.name}</span><span>${ priceRange}</span>
+>>>>>>> master
       <i class="fas fa-chevron-right"></i>
     </a>
   `;
@@ -158,8 +166,12 @@ const filterList = e => {
 		removeFriendToList(e.target.value);
 	}
 };
+<<<<<<< HEAD
+// DIsplay friend name and add listener to all of them
+=======
 
 // Display friend name and add listener to all of them
+>>>>>>> master
 async function displayFriendNames(friends) {
 	for (const friend of friends) {
 		await appendFriend(friend);
@@ -222,15 +234,26 @@ const displayRestaurantList = list => {
 		appendRestaurant(restaurant);
 	});
 	generateMarkers(list);
+<<<<<<< HEAD
+=======
 	//Add eventL Listener to all
+>>>>>>> master
 };
 
 const multipleCheckboxesSelection = (e, inputs) => {
 	restaurantsIdToDisplay = [];
 	let isChecked = e.target.classList.contains("blue-triangle");
+<<<<<<< HEAD
+
 	if (isChecked) {
 		displayRestaurantList(datas.user_restaurants);
 	}
+
+=======
+	if (isChecked) {
+		displayRestaurantList(datas.user_restaurants);
+	}
+>>>>>>> master
 	inputs.forEach(input => {
 		if (isChecked) {
 			if (input.checked) {
