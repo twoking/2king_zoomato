@@ -1,4 +1,3 @@
-import "mapbox-gl/dist/mapbox-gl.css"; // <-- you need to uncomment the stylesheet_pack_tag in the layout!
 import { listRestaurants } from "components/restaurants-nearby";
 import { searchRestaurant } from "components/restaurant-search";
 import { fetchRestaurantsNearBy } from "components/restaurants-nearby";
