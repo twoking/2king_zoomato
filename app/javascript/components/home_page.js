@@ -28,8 +28,10 @@ if (map) {
 
 //Restaurant Card
 const restaurantCard = restaurant => {
+const priceRange = restaurant.price_level ? "$".repeat(restaurant.price_level) : ""
+
 	return `
-    <a href="/restaurants/${restaurant.zoomato_place_id}"%>
+    <a data-id="${restaurant.zoomato_place_id}"%>
       <div class="card-product my-2">
         <img src="${restaurant.photos[0]}">
         <div class="card-product-infos">
@@ -38,7 +40,7 @@ const restaurantCard = restaurant => {
             <span class="resto-distance">${restaurant.address}</span>
           </p>
           <p class="my-0 mr-1">
-            ${restaurant.price_level} | ${restaurant.cousines ||
+            ${priceRange} | ${restaurant.cousines ||
 		restaurant.cuisines}
           </p>
         </div>
@@ -60,11 +62,12 @@ const friendInput = friend => {
 };
 
 const addInfoWindow = restaurant => {
+	const priceRange = restaurant.price_level ? "$".repeat(restaurant.price_level) : ""
 	const infoWinfow = document.querySelector("#restaurant-info-window");
 	if (infoWinfow) infoWinfow.remove();
 	const panel = `
     <a class="map-info-window" id="restaurant-info-window" href="/restaurants/${restaurant.zoomato_place_id}">
-      ${restaurant.name}
+			 <span class="mr-1">${restaurant.name}</span><span>${ priceRange}</span>
       <i class="fas fa-chevron-right"></i>
     </a>
   `;
@@ -219,6 +222,7 @@ const displayRestaurantList = list => {
 		appendRestaurant(restaurant);
 	});
 	generateMarkers(list);
+	//Add eventL Listener to all
 };
 
 const multipleCheckboxesSelection = (e, inputs) => {
