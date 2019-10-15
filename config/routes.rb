@@ -9,4 +9,9 @@ Rails.application.routes.draw do
   get "search_nearby", to: "restaurants#search_nearby", as: "search_nearby"
   get "search_restaurant", to: "restaurants#search_restaurant", as: "search_restaurant"
   #get "list/:token" to: "users#user_list", as:"user_list"
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :restaurants, only: [:index]
+    end
+  end
 end

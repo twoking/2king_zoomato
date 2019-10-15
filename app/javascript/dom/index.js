@@ -1,3 +1,3 @@
 import './toggler'
-import './map-filter'
+// import './map-filter'
 import './checkbox';

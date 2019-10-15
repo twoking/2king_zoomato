@@ -1,17 +1,18 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  acts_as_token_authenticatable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook]
 
   # association
   has_many :friendships, class_name: "Friendship",
-                        foreign_key: "follower_id",
-                        dependent: :destroy
-  has_many :passive_friendships, class_name:  "Friendship",
-                                foreign_key: "followed_id",
-                                dependent:   :destroy
+                         foreign_key: "follower_id",
+                         dependent: :destroy
+  has_many :passive_friendships, class_name: "Friendship",
+                                 foreign_key: "followed_id",
+                                 dependent: :destroy
 
   has_many :followings, through: :friendships, source: :followed
   has_many :followers, through: :passive_friendships, source: :follower
@@ -20,10 +21,10 @@ class User < ApplicationRecord
   has_many :restaurants, through: :lists
 
   # validation
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates_presence_of :name
-  validates_format_of :email, with: VALID_EMAIL_REGEX
+  #validates_format_of :email, with: VALID_EMAIL_REGEX
 
   # callbacks
   before_save { self.email = email.downcase }
@@ -89,7 +90,7 @@ class User < ApplicationRecord
     filter_map = {
       "1" => lambda { friends_restaurants },
       "2" => lambda { second_degree_friends_restos },
-      "3" => lambda { third_degree_friends_restos }
+      "3" => lambda { third_degree_friends_restos },
     }
 
     unless options[:degrees].blank?

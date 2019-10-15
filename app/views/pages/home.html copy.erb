@@ -1,14 +1,10 @@
 <% provide(:title, "Home") %>
 <div class="full-page-container">
 
-<div id="map-reload"><i class="fas fa-sync-alt"></i>
-  Refresh The map</div>
-
 <div class="map-wrapper">
-  <div id="map"  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-    class="home-map">
+  <div id="map" class="home-map">
   </div>
- 
+  <div id="info-window" class="invisible"></div>
 </div>
 
 
@@ -22,10 +18,10 @@
   </div>
 
 
-  <div id="restaurant-list" class="container home-container panel overflow-auto active">
-    <!-- <#% current_user.restaurants.each do |resto| %>
-      <%#= render "restaurants/restaurant_card", resto: resto, link: true %>
-    <#% end %> -->
+  <div class="container home-container panel overflow-auto active">
+    <% current_user.restaurants.each do |resto| %>
+      <%= render "restaurants/restaurant_card", resto: resto, link: true %>
+    <% end %>
   </div>
 
   <%= render 'shared/filter/degree-filter' %>
@@ -58,7 +54,3 @@
     </div>
   </div>
 </div>
-
-
-
-<div id="modal"></div>

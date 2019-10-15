@@ -26,7 +26,7 @@ class Restaurant < ApplicationRecord
 
   def self.order_by_distance(resto, params)
     resto.each do |r|
-      r.distance_from_me = (Geocoder::Calculations.distance_between(params, [r.latitude, r.longitude]) * 10).round(2)
+      r.distance_from_me = (Geocoder::Calculations.distance_between(params, [r.latitude, r.longitude]) ).round(2)
     end
     resto.sort_by { |restaurant| restaurant.distance_from_me }
   end
