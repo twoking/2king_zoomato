@@ -10,10 +10,11 @@ import "dom";
 import "bootstrap";
 
 const indexPage = document.querySelector("#search-restaurant-nearby");
+const homePage = document.querySelector(".map-wrapper");
 indexPage && listRestaurants();
 indexPage && fetchRestaurantsNearBy();
 indexPage && searchRestaurant();
-initHomePage();
+homePage && initHomePage();
 initAutocomplete();
 window.initAutocomplete = initAutocomplete
 
