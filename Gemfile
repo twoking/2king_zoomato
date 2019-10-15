@@ -9,7 +9,7 @@ gem "nokogiri", ">= 1.10.4"
 gem 'puma'
 gem 'rails', '5.2.3'
 gem 'redis'
-gem 'rest-client', '~> 1.8'
+gem 'rest-client', '~> 2.1.0'
 gem 'omniauth-facebook'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
