@@ -1,16 +1,28 @@
+import mapboxgl from 'mapbox-gl';
+import { loadMap } from '../plugins/init_mapbox';
+import haversine from "haversine"
+
+document.querySelector("#map").addEventListener("click", (e)=>{
+  if(e.target.tagName == "CANVAS"){
+    const infoWinfow = document.querySelector("#restaurant-info-window");
+    if (infoWinfow) infoWinfow.remove() 
+  }
+})
+
+
 const restaurantsContainer =  document.querySelector("#restaurant-list")
 const friendsContainer = document.querySelector("#friends-list")
 let friendsIdsToDisplay = []
 let restaurantsIdToDisplay = []
 let datas = new Array; 
 let degreeToDisplay = [0]
+let restaurantsToDisplay = []
 let first_degree_friends_restaurants_id = new Array; 
 let second_degree_friends_restaurants_id = new Array; 
 let third_degree_friends_restaurants_id = new Array; 
 let my_restaurants_id =  new Array; 
-
-
-
+let mapElement;
+let markers = [];
 // HTML Components
 //Restaurant Card
 const restaurantCard = (restaurant) => {
@@ -37,6 +49,16 @@ const friendInput = (friend) => {
 `)
 }
 
+const addInfoWindow = (restaurant) => {
+  const infoWinfow = document.querySelector("#restaurant-info-window");
+  if (infoWinfow) infoWinfow.remove() 
+  const panel =  `<a class="map-info-window" id="restaurant-info-window" href="/restaurants/${restaurant.zoomato_place_id}">
+ ${restaurant.name}
+ <i class="fas fa-chevron-right"></i>
+</a>
+`;
+document.querySelector("#map").insertAdjacentHTML("afterbegin", panel)
+}
 
 const appendRestaurant = (restaurant) => {
   restaurantsContainer.insertAdjacentHTML("afterbegin", restaurantCard(restaurant) )
@@ -46,17 +68,47 @@ const appendFriend = (friend) => {
   friendsContainer.insertAdjacentHTML("afterbegin", friendInput(friend) )
 }
 
+
+
+const generateMarkers = () => {
+  if(markers.length > 0 ) markers.forEach(marker => marker.remove())
+  markers = []
+  const mapCenter = mapElement.getCenter()
+  restaurantsToDisplay.forEach((restaurant) => {
+    const restaurantLocation = {latitude: restaurant.latitude, longitude: restaurant.longitude }
+    const mapCenterLocation = {latitude: mapCenter.lat, longitude: mapCenter.lng }
+    const distance = haversine(restaurantLocation, mapCenterLocation)
+    if (distance <= 3){
+      const marker = new mapboxgl.Marker()
+        .setLngLat([ restaurant.longitude, restaurant.latitude ])
+      marker._element.dataset.id = restaurant.zoomato_place_id
+      markers.push(marker)
+    }    
+  });
+  attachMarkersToMap()
+}
+
+const attachMarkersToMap = () => {
+  markers.forEach((marker) => {
+    marker.addTo(mapElement)
+    marker._element.addEventListener("click", (e)=>{
+      const restaurant = restaurantsToDisplay.find(restaurant => restaurant.zoomato_place_id == e.currentTarget.dataset.id )
+      addInfoWindow(restaurant)
+    })
+  })
+}
+
 //BLUE FRIEND CHECKBOXES
 //Add and rmeove single Friends (friend's name checkbox)
 
 //Get restaurants based on an array of friends
 const updateREstaurantList = () => {
-  const friendsList = datas.first_degree_friend.filter((value) => { return friendsIdsToDisplay.includes(value.id)})
-  restaurantsIdToDisplay = friendsList.map ((friend) => { return friend.restaurants }).flat()
-  const restaurants = datas.friend_restaurants.filter((restaurant) => { 
+  const friendsList = datas.first_degree_friend.filter( (value) => friendsIdsToDisplay.includes(value.id) )
+  restaurantsIdToDisplay = friendsList.map ((friend) => friend.restaurants ).flat()
+  restaurantsToDisplay = datas.friend_restaurants.filter((restaurant) => { 
     return restaurantsIdToDisplay.flat().includes(restaurant.zoomato_place_id)
   })
-  displayRestaurantList(restaurants)
+  displayRestaurantList(restaurantsToDisplay)
 }
 
 const addFriendToList = (id) => {
@@ -93,28 +145,21 @@ async function displayFriendNames(friends) {
 }
 
 
-
-
-
-
-
-
 // DIsplay all the restaurants based on the degree
-const getRestaurantsByIds = () => {
+const getRestaurantsByIds = async () => {
   let ids = []
-  if (degreeToDisplay.includes(0)) ids.push(my_restaurants_id)
+  if (degreeToDisplay.includes(0)) ids.push(my_restaurants_id) 
   if (degreeToDisplay.includes(1)) ids.push(first_degree_friends_restaurants_id)
   if (degreeToDisplay.includes(2)) ids.push(second_degree_friends_restaurants_id)
   if (degreeToDisplay.includes(3)) ids.push(third_degree_friends_restaurants_id)
   let restaurants = []
   ids = ids.flat()
     restaurants = datas.friend_restaurants.filter((restaurant) => {
-      console.log(restaurant.zoomato_place_id)
      return ids.includes(restaurant.zoomato_place_id)
    })  
    const uniq = new Set(restaurants.map(e => JSON.stringify(e)));
-   restaurants = Array.from(uniq).map(e => JSON.parse(e));
-   displayRestaurantList(restaurants)
+   restaurantsToDisplay = Array.from(uniq).map(e => JSON.parse(e));
+   displayRestaurantList(restaurantsToDisplay)
 }
 
 
@@ -156,6 +201,7 @@ const displayRestaurantList = (list) => {
   list.forEach(restaurant => {
     appendRestaurant(restaurant)
   });
+  generateMarkers(list)
 }
 
 const multipleCheckboxesSelection = (e, inputs) => {
@@ -179,11 +225,15 @@ const multipleCheckboxesSelection = (e, inputs) => {
 
 const buildPage = (data) => {
   displayRestaurantList(data.user_restaurants)
+  restaurantsToDisplay = data.user_restaurants
+  generateMarkers()
   displayFriendNames(data.first_degree_friend)
   listFiltering()
 }
 
-const initHomePage = () => {
+
+const initHomePage  = async  () => {
+  mapElement = await loadMap
   fetch("api/v1/restaurants")
     .then(response => response.json())
     .then((data) => {
@@ -192,7 +242,9 @@ const initHomePage = () => {
       first_degree_friends_restaurants_id = data.first_degree_friend.map((friend) => friend.restaurants ).flat()
       second_degree_friends_restaurants_id = data.second_degree_friend.map((friend) => friend.restaurants ).flat()
       third_degree_friends_restaurants_id = data.third_degree_friend.map((friend) => friend.restaurants ).flat()
-      buildPage(data)
+      buildPage(data);
+      const refreshBtn = document.querySelector("#map-reload")
+      refreshBtn.addEventListener("click", generateMarkers )
     });
 }
 
