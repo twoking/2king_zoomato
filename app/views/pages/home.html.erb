@@ -1,10 +1,14 @@
 <% provide(:title, "Home") %>
 <div class="full-page-container">
 
+<div id="map-reload"><i class="fas fa-sync-alt"></i>
+  Refresh The map</div>
+
 <div class="map-wrapper">
-  <div id="map" class="home-map">
+  <div id="map"  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+    class="home-map">
   </div>
-  <div id="info-window" class="invisible"></div>
+ 
 </div>
 
 
