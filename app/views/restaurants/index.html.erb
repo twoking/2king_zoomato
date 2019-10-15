@@ -2,6 +2,8 @@
   <h1 class="mt-4 mb-4 text-center">ADD A RESTAURANT</h1>
   <%= form_tag(search_restaurant_path, { method: :get, id: "search-restaurant-form", remote: true }) do %>
     <%= text_field_tag :name, params[:name], class: "form-control mb-1", placeholder: "Name of the restaurant" %>
+    <%= hidden_field_tag('lat', value = nil, {id: "current_lat_field_search"}) %>
+    <%= hidden_field_tag('lng', value = nil, {id: "current_lng_field_search"}) %>
     <div class="d-flex">
       <%= text_field_tag :location, params[:location], class: "form-control", placeholder: "Location", id:"restaurant-location" %>
       <%= button_tag(type: "submit", class: "btn btn-primary", id:"search-restaurant") do %>
@@ -10,10 +12,10 @@
     </div>
   <% end %>
   <div class="text-center py-2 mb-0">OR</div>
-  <%= form_tag search_nearby_path, method: "get",id:"search_nearby_form", remote: true do %>
-    <%= hidden_field_tag('lat', value = nil, {:id => "current_lat_field"}) %>
-    <%= hidden_field_tag('lng', value = nil, {:id => "current_lng_field"}) %>
-    <%= hidden_field_tag('ids', value = nil, {:id => "stored_restaurants"}) %>
+  <%= form_tag search_nearby_path, method: "get", id: "search_nearby_form", remote: true do %>
+    <%= hidden_field_tag('lat', value = nil, {id: "current_lat_field"}) %>
+    <%= hidden_field_tag('lng', value = nil, {id: "current_lng_field"}) %>
+    <%= hidden_field_tag('ids', value = nil, {id: "stored_restaurants"}) %>
     <%= button_tag(type: "submit", class: "btn", id: "search-restaurant-nearby") do %>
       <i class="mr-2 fas fa-search-location"></i>Search Restaurant Nearby
     <% end %>
