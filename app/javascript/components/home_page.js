@@ -18,27 +18,32 @@ let mapElement;
 let markers = [];
 
 // HTML Components
-map.addEventListener("click", e => {
-	if (e.target.tagName == "CANVAS") {
-		const infoWinfow = document.querySelector("#restaurant-info-window");
-		if (infoWinfow) infoWinfow.remove();
-	}
-});
+if (map) {
+	map.addEventListener("click", e => {
+		if (e.target.tagName == "CANVAS") {
+			const infoWinfow = document.querySelector("#restaurant-info-window");
+			if (infoWinfow) infoWinfow.remove();
+		}
+	});
+}
 
 //Restaurant Card
 const restaurantCard = restaurant => {
+const priceRange = restaurant.price_level ? "$".repeat(restaurant.price_level) : ""
+
 	return `
-    <a href="/restaurants/${restaurant.zoomato_place_id}"%>
+    <a data-id="${restaurant.zoomato_place_id}"%>
       <div class="card-product my-2">
         <img src="${restaurant.photos[0]}">
         <div class="card-product-infos">
-            <h2>${restaurant.name}</h2>
-            <p class="my-0">
-              <span class="resto-distance">${restaurant.address}</span>
-            </p>
-            <p class="my-0 mr-1">
-              ${restaurant.price_level} | ${restaurant.cousines}
-            </p>
+          <h2>${restaurant.name}</h2>
+          <p class="my-0">
+            <span class="resto-distance">${restaurant.address}</span>
+          </p>
+          <p class="my-0 mr-1">
+            ${priceRange} | ${restaurant.cousines ||
+		restaurant.cuisines}
+          </p>
         </div>
       </div>
     </a>
@@ -58,11 +63,19 @@ const friendInput = friend => {
 };
 
 const addInfoWindow = restaurant => {
+<<<<<<< HEAD
+=======
+	const priceRange = restaurant.price_level ? "$".repeat(restaurant.price_level) : ""
+>>>>>>> master
 	const infoWinfow = document.querySelector("#restaurant-info-window");
 	if (infoWinfow) infoWinfow.remove();
 	const panel = `
     <a class="map-info-window" id="restaurant-info-window" href="/restaurants/${restaurant.zoomato_place_id}">
+<<<<<<< HEAD
       ${restaurant.name}
+=======
+			 <span class="mr-1">${restaurant.name}</span><span>${ priceRange}</span>
+>>>>>>> master
       <i class="fas fa-chevron-right"></i>
     </a>
   `;
@@ -153,7 +166,12 @@ const filterList = e => {
 		removeFriendToList(e.target.value);
 	}
 };
+<<<<<<< HEAD
 // DIsplay friend name and add listener to all of them
+=======
+
+// Display friend name and add listener to all of them
+>>>>>>> master
 async function displayFriendNames(friends) {
 	for (const friend of friends) {
 		await appendFriend(friend);
@@ -216,16 +234,26 @@ const displayRestaurantList = list => {
 		appendRestaurant(restaurant);
 	});
 	generateMarkers(list);
+<<<<<<< HEAD
+=======
+	//Add eventL Listener to all
+>>>>>>> master
 };
 
 const multipleCheckboxesSelection = (e, inputs) => {
 	restaurantsIdToDisplay = [];
 	let isChecked = e.target.classList.contains("blue-triangle");
+<<<<<<< HEAD
 
 	if (isChecked) {
 		displayRestaurantList(datas.user_restaurants);
 	}
 
+=======
+	if (isChecked) {
+		displayRestaurantList(datas.user_restaurants);
+	}
+>>>>>>> master
 	inputs.forEach(input => {
 		if (isChecked) {
 			if (input.checked) {
